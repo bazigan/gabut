@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CreateVMForm from '../CreateVMForm';
+import CreateVMForm from './CreateVMForm';
 
 function App() {
   const [page, setPage] = useState('login');
