@@ -1,5 +1,32 @@
 import React, { useState, useEffect } from 'react';
 
+const inputStyle = {
+  width: '100%',
+  padding: '8px 12px',
+  border: '1px solid #0074d9',
+  borderRadius: 6,
+  marginTop: 4,
+  marginBottom: 2,
+  fontSize: 16,
+  background: '#f8fbff',
+  color: '#222'
+};
+const selectStyle = {
+  ...inputStyle
+};
+const buttonStyle = {
+  background: '#0074d9',
+  color: '#fff',
+  border: 'none',
+  borderRadius: 6,
+  padding: '10px 0',
+  fontWeight: 600,
+  fontSize: 18,
+  marginTop: 8,
+  cursor: 'pointer',
+  boxShadow: '0 1px 4px #0074d922'
+};
+
 export default function CreateVMForm() {
   const [form, setForm] = useState({
     proxmoxHost: '',
