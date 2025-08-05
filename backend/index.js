@@ -1,4 +1,4 @@
-// ...existing code...
+
 const axios = require('axios');
 
 // Endpoint untuk dropdown form CreateVM (ambil data dari Proxmox)
@@ -88,8 +88,7 @@ app.post('/api/login', (req, res) => {
 });
 
 
-// Endpoint untuk membuat VM di Proxmox
-const axios = require('axios');
+
 
 app.post('/api/create-vm', async (req, res) => {
   let { proxmoxHost, username, password, node, vmid, name, memory, cores, storage, iso } = req.body;
