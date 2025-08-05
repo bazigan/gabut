@@ -47,8 +47,8 @@ app.post('/api/create-vm', async (req, res) => {
       cores,
       storage
     };
-    // Hanya tambahkan iso jika ada dan storage bertipe iso
-    if (iso && typeof iso === 'string' && iso.includes(':iso/')) {
+    // Hanya tambahkan iso jika ada, tidak kosong, dan storage bertipe iso
+    if (iso && typeof iso === 'string' && iso.includes(':iso/') && iso.trim() !== '') {
       payload.iso = iso;
     }
 
