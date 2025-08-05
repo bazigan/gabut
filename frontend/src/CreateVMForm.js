@@ -133,14 +133,7 @@ export default function CreateVMForm() {
         </select>
       </label>
       <label style={{ color: '#0074d9', fontWeight: 500 }}>Username
-        <select name="username" value={form.username} onChange={handleChange} required style={selectStyle}>
-          <option value="">Pilih User</option>
-          {users.length === 0 && <>
-            <option value="root@pam">root@pam</option>
-            <option value="admin@pam">admin@pam</option>
-          </>}
-          {users.map(u => <option key={u} value={u}>{u}</option>)}
-        </select>
+        <input name="username" placeholder="Username (user@pam)" value={form.username} onChange={handleChange} required style={inputStyle} />
       </label>
       <label style={{ color: '#0074d9', fontWeight: 500 }}>Password
         <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} required style={inputStyle} />

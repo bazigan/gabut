@@ -47,8 +47,10 @@ app.post('/api/create-vm', async (req, res) => {
       cores,
       storage
     };
-    // Hanya tambahkan iso jika ada dan tidak kosong
-    if (iso) payload.iso = iso;
+    // Hanya tambahkan iso jika ada dan storage bertipe iso
+    if (iso && typeof iso === 'string' && iso.includes(':iso/')) {
+      payload.iso = iso;
+    }
 
     const createRes = await axios.post(
       `https://${proxmoxHost}:${proxmoxPort}/api2/json/nodes/${node}/qemu`,
