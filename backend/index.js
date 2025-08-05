@@ -27,7 +27,6 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/create-vm', async (req, res) => {
   let { proxmoxHost, username, password, node, vmid, name, memory, cores, storage, iso } = req.body;
-  // Gunakan default dari .env jika tidak dikirim dari frontend
   if (!proxmoxHost) proxmoxHost = process.env.DEFAULT_PROXMOX_HOST;
   const proxmoxPort = process.env.DEFAULT_PROXMOX_PORT || 8006;
   try {
@@ -40,17 +39,20 @@ app.post('/api/create-vm', async (req, res) => {
     const ticket = loginRes.data.data.ticket;
     const csrf = loginRes.data.data.CSRFPreventionToken;
 
-    // 2. Buat VM
+    // 2. Buat payload hanya dengan field yang diizinkan
+    const payload = {
+      vmid,
+      name,
+      memory,
+      cores,
+      storage
+    };
+    // Hanya tambahkan iso jika ada dan tidak kosong
+    if (iso) payload.iso = iso;
+
     const createRes = await axios.post(
       `https://${proxmoxHost}:${proxmoxPort}/api2/json/nodes/${node}/qemu`,
-      {
-        vmid,
-        name,
-        memory,
-        cores,
-        storage,
-        iso
-      },
+      payload,
       {
         headers: {
           Cookie: `PVEAuthCookie=${ticket}`,
