@@ -91,11 +91,18 @@ export default function CreateVMForm() {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    // Prepare payload
+    const payload = { ...form };
+    // If ISO is selected, add ide2 key and remove iso
+    if (form.iso && form.storage) {
+      payload.ide2 = `${form.storage}:iso/${form.iso},media=cdrom`;
+      delete payload.iso;
+    }
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/create-vm`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify(payload)
       });
       const data = await res.json();
       if (data.success) {

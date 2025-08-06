@@ -47,9 +47,9 @@ app.post('/api/create-vm', async (req, res) => {
       cores,
       storage
     };
-    // Hanya tambahkan iso jika ada, tidak kosong, dan storage bertipe iso
-    if (iso && typeof iso === 'string' && iso.includes(':iso/') && iso.trim() !== '') {
-      payload.iso = iso;
+    // Hanya tambahkan images jika ada, tidak kosong, dan storage bertipe iso
+    if (iso && typeof iso === 'string' && iso.trim() !== '' && iso !== 'null' && iso !== 'undefined' && iso.includes(':iso/')) {
+      payload.images = iso;
     }
 
     const createRes = await axios.post(
